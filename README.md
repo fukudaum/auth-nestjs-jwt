@@ -1,73 +1,120 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+Authentication Application with NestJS, PostgreSQL, and Prisma
+This project demonstrates how to create an authentication system using NestJS, PostgreSQL, and Prisma. Following the guidelines provided in the official NestJS documentation for authentication, this application covers user registration, login, and protected routes.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Table of Contents
+Getting Started
+Prerequisites
+Installation
+Running the Application
+Testing
+Project Structure
+Configuration
+Endpoints
+Contributing
+License
+Getting Started
+To get a local copy up and running, follow these simple steps.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Prerequisites
+Node.js (v14 or higher)
+npm or yarn
+Docker (for running PostgreSQL)
+Installation
+Clone the repo
 
-## Description
+sh
+Copy code
+git clone https://github.com/your-username/auth-nestjs-jwt.git
+cd auth-nestjs-jwt
+Install NPM packages
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+sh
+Copy code
+npm install
+Start PostgreSQL using Docker
 
-## Installation
+sh
+Copy code
+docker run --name nestjs-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=authdb -p 5432:5432 -d postgres
+Set up Prisma
 
-```bash
-$ npm install
-```
+sh
+Copy code
+npx prisma init
+Update the .env file with your database connection string
 
-## Running the app
+makefile
+Copy code
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/authdb?schema=public"
+Run Prisma migrations
 
-```bash
-# development
-$ npm run start
+sh
+Copy code
+npx prisma migrate dev --name init
+Generate Prisma client
 
-# watch mode
-$ npm run start:dev
+sh
+Copy code
+npx prisma generate
+Running the Application
+Start the development server
 
-# production mode
-$ npm run start:prod
-```
+sh
+Copy code
+npm run start:dev
+Open your browser and navigate to http://localhost:3000.
 
-## Test
+Testing
+To run the tests, use the following command:
 
-```bash
-# unit tests
-$ npm run test
+sh
+Copy code
+npm run test
+Project Structure
+plaintext
+Copy code
+src/
+├── auth/
+│   ├── dto/
+│   ├── guards/
+│   ├── strategies/
+│   ├── auth.controller.ts
+│   ├── auth.module.ts
+│   └── auth.service.ts
+├── users/
+│   ├── dto/
+│   ├── entities/
+│   ├── users.controller.ts
+│   ├── users.module.ts
+│   └── users.service.ts
+├── prisma/
+│   ├── prisma.module.ts
+│   ├── prisma.service.ts
+├── app.module.ts
+├── main.ts
+└── ...
+Configuration
+The application can be configured using environment variables. The .env file contains the following variables:
 
-# e2e tests
-$ npm run test:e2e
+plaintext
+Copy code
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/authdb?schema=public"
+JWT_SECRET="your_jwt_secret"
+JWT_EXPIRES_IN="3600s"
+Endpoints
+Authentication
+POST /auth/register - Register a new user
+POST /auth/login - Log in and receive a JWT
+Users
+GET /users - Get all users (protected route)
+GET /users/:id - Get user by ID (protected route)
+Contributing
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+Fork the Project
+Create your Feature Branch (git checkout -b feature/AmazingFeature)
+Commit your Changes (git commit -m 'Add some AmazingFeature')
+Push to the Branch (git push origin feature/AmazingFeature)
+Open a Pull Request
+License
+Distributed under the MIT License. See LICENSE for more information.
