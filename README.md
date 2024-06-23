@@ -70,7 +70,7 @@ To run the tests, use the following command:
    ```sh
    npm run test
 
-## Project Structure
+# Project Structure
    ```plaintext
    src/
    ├── auth/
