@@ -58,19 +58,19 @@ To get a local copy up and running, follow these simple steps.
    ```sh
    npx prisma generate
 
-##Running the Application
+## Running the Application
 1. Start the development server
    ```sh
    npm run start:dev
 
 2. Open your browser and navigate to http://localhost:3000.
 
-##Testing
+## Testing
 To run the tests, use the following command:
    ```sh
    npm run test
 
-##Project Structure
+## Project Structure
    ```plaintext
    src/
    ├── auth/
@@ -93,7 +93,7 @@ To run the tests, use the following command:
    ├── main.ts
    └── ...
 
-##Configuration
+## Configuration
 The application can be configured using environment variables. The .env file contains the following variables:
 
    ```plaintext
@@ -101,16 +101,16 @@ The application can be configured using environment variables. The .env file con
    JWT_SECRET="your_jwt_secret"
    JWT_EXPIRES_IN="3600s"
 
-##Endpoints
-###Authentication
+## Endpoints
+### Authentication
 - POST /auth/register - Register a new user
 - POST /auth/login - Log in and receive a JWT
 
-###Users
+### Users
 - GET /users - Get all users (protected route)
 - GET /users/:id - Get user by ID (protected route)
 
-##Contributing
+## Contributing
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
 1. Fork the Project
@@ -119,5 +119,5 @@ Contributions are what make the open-source community such an amazing place to l
 4. Push to the Branch (git push origin feature/AmazingFeature)
 5. Open a Pull Request
 
-##License
+## License
 Distributed under the MIT License. See LICENSE for more information.
